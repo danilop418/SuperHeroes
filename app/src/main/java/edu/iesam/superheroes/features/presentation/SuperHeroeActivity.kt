@@ -35,6 +35,19 @@ class SuperHeroeActivity : AppCompatActivity() {
         )
 
         //Show
-        viewModel.fetch()
+        fun test() {
+            val signInUse = SignInUseCase()
+            val userResult = signInUse("asd", "asd")
+            userResult.fold(
+                {isLoginSuccess(it)},
+                {isFailure(it as ErrorApp)}
+            )
+        }
+        fun isLoginSuccess(user:User){
+
+        }
+        fun isFailure(errorApp: ErrorApp){
+            val error = errorApp as ErrorApp.PasswordError
+        }
     }
 }
