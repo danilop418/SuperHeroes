@@ -6,6 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.superheroes.R
+import edu.iesam.superheroes.features.data.remote.SuperHeroesApiRemoteDataSource
+import edu.iesam.superheroes.features.data.SuperHeroesDataRepository
+import edu.iesam.superheroes.features.domain.FetchSuperHeroeUseCase
+import edu.iesam.superheroes.features.domain.SuperHeroe
 
 class SuperHeroeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,4 +24,17 @@ class SuperHeroeActivity : AppCompatActivity() {
     }
 
     //llamada solo
+    fun initStudents() {
+
+        val api = SuperHeroesApiRemoteDataSource()
+        val dataRepository = SuperHeroesDataRepository(api)
+        val fetchSuperHeroeUseCase = FetchSuperHeroeUseCase(dataRepository)
+
+        val viewModel = SuperHeroesListViewModel(
+            fetchSuperHeroeUseCase
+        )
+
+        //Show
+        viewModel.fetch()
+    }
 }
