@@ -57,6 +57,23 @@ class FetchSuperHeroeUseCaseTest {
 
         // Then
         assertTrue(result.isFailure)
+        assertEquals(ErrorApp.InternetConexionError, result.exceptionOrNull())
+    }
+
+    @Test
+    fun `when repository returns server error then usecase returns server error`() {
+        // Given
+        val superheroeRepositoryMockk = mockk<SuperHeroeRepository>()
+        every { superheroeRepositoryMockk.fetch() } returns Result.failure(ErrorApp.ServerErrorApp)
+
+        val superHeroeUseCase = FetchSuperHeroeUseCase(superheroeRepositoryMockk)
+
+        // When
+        val result = superHeroeUseCase.fetch()
+
+        // Then
+        assertTrue(result.isFailure)
+        assertEquals(ErrorApp.ServerErrorApp, result.exceptionOrNull())
     }
 
 }
