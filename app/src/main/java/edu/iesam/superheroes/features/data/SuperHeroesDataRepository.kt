@@ -11,5 +11,4 @@ class SuperHeroesDataRepository(
     override fun fetch(): Result<List<SuperHeroe>> {
         return apiRemoteDataSource.getSuperHeroes()
     }
-
 }
