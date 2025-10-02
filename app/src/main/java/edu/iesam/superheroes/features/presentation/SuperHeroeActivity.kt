@@ -24,7 +24,6 @@ class SuperHeroeActivity : AppCompatActivity() {
         }
     }
 
-    //llamada solo
     fun initStudents() {
 
         val api = SuperHeroesApiRemoteDataSource()
