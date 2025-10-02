@@ -1,6 +1,8 @@
 package edu.iesam.superheroes.features.presentation
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -39,7 +41,7 @@ class SuperHeroeActivity : AppCompatActivity() {
     }
 
     private fun onFetchSuccess(heroes: List<SuperHeroe>) {
-        println("Loadding Superheroes : ${heroes.size}")
+        Log.d(TAG, "Loadding Superheroes : ${heroes.size}")
     }
 
     private fun onFetchFailure(errorApp: ErrorApp) {
@@ -50,10 +52,10 @@ class SuperHeroeActivity : AppCompatActivity() {
     }
 
     private fun showInternetError() {
-        println("Error: You don´t have internet")
+        Log.d(TAG, "Error: You don´t have internet")
     }
 
     private fun showServerError() {
-        println("Error: The server is fall")
+        Log.d(TAG, "Error: The server is fall")
     }
 }
