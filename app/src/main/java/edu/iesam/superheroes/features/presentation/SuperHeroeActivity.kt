@@ -24,9 +24,11 @@ class SuperHeroeActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        initSuperHeroes()
     }
 
-    fun initStudents() {
+    fun initSuperHeroes() {
 
         val api = SuperHeroesApiRemoteDataSource()
         val dataRepository = SuperHeroesDataRepository(api)
@@ -58,4 +60,5 @@ class SuperHeroeActivity : AppCompatActivity() {
     private fun showServerError() {
         Log.d(TAG, "Error: The server is fall")
     }
+
 }
