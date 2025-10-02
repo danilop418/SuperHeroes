@@ -9,7 +9,6 @@ import com.example.superheroes.R
 import edu.iesam.superheroes.features.data.remote.SuperHeroesApiRemoteDataSource
 import edu.iesam.superheroes.features.data.SuperHeroesDataRepository
 import edu.iesam.superheroes.features.domain.FetchSuperHeroeUseCase
-import edu.iesam.superheroes.features.domain.SuperHeroe
 
 class SuperHeroeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,11 +29,9 @@ class SuperHeroeActivity : AppCompatActivity() {
         val dataRepository = SuperHeroesDataRepository(api)
         val fetchSuperHeroeUseCase = FetchSuperHeroeUseCase(dataRepository)
 
-        val viewModel = SuperHeroesListViewModel(
-            fetchSuperHeroeUseCase
-        )
+        val superHeroesResult = fetchSuperHeroeUseCase.fetch()
 
         //Show
-       if (viewModel.fetch().isFailure) return
+        if (viewModel.fetch().isFailure) return
     }
 }
