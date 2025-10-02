@@ -8,7 +8,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.superheroes.R
 import edu.iesam.superheroes.features.data.remote.SuperHeroesApiRemoteDataSource
 import edu.iesam.superheroes.features.data.SuperHeroesDataRepository
+import edu.iesam.superheroes.features.domain.ErrorApp
 import edu.iesam.superheroes.features.domain.FetchSuperHeroeUseCase
+import edu.iesam.superheroes.features.domain.SuperHeroe
 
 class SuperHeroeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +33,28 @@ class SuperHeroeActivity : AppCompatActivity() {
 
         val superHeroesResult = fetchSuperHeroeUseCase.fetch()
 
-        //Show
-        if (viewModel.fetch().isFailure) return
+        superHeroesResult.fold(
+            { heroes -> onFetchSuccess(heroes) },
+            { error -> onFetchFailure(error as ErrorApp) }
+        )
+    }
+
+    private fun onFetchSuccess(heroes: List<SuperHeroe>) {
+        println("Loadding Superheroes : ${heroes.size}")
+    }
+
+    private fun onFetchFailure(errorApp: ErrorApp) {
+        when (errorApp) {
+            is ErrorApp.InternetConexionError -> showInternetError()
+            is ErrorApp.ServerErrorApp -> showServerError()
+        }
+    }
+
+    private fun showInternetError() {
+        println("Error: You don´t have internet")
+    }
+
+    private fun showServerError() {
+        println("Error: The server is fall")
     }
 }
