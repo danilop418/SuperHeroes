@@ -42,22 +42,22 @@ class SuperHeroeActivity : AppCompatActivity() {
         )
     }
 
-    private fun onFetchSuccess(heroes: List<SuperHeroe>) {
+    fun onFetchSuccess(heroes: List<SuperHeroe>) {
         Log.d(TAG, "Loadding Superheroes : ${heroes.size}")
     }
 
-    private fun onFetchFailure(errorApp: ErrorApp) {
+    fun onFetchFailure(errorApp: ErrorApp) {
         when (errorApp) {
             is ErrorApp.InternetConexionError -> showInternetError()
             is ErrorApp.ServerErrorApp -> showServerError()
         }
     }
 
-    private fun showInternetError() {
+    fun showInternetError() {
         Log.d(TAG, "Error: You don´t have internet")
     }
 
-    private fun showServerError() {
+    fun showServerError() {
         Log.d(TAG, "Error: The server is fall")
     }
 
