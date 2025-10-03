@@ -2,6 +2,7 @@ package edu.iesam.superheroes.features.domain
 
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -43,6 +44,7 @@ class FetchSuperHeroeUseCaseTest {
         //Then
         assertTrue(result.isSuccess)
         assertEquals(expectedHeroes, result.getOrNull())
+        verify(exactly = 1) { superheroeRepositoryMockk.fetch() }
     }
 
     @Test
@@ -58,6 +60,7 @@ class FetchSuperHeroeUseCaseTest {
         // Then
         assertTrue(result.isFailure)
         assertEquals(ErrorApp.InternetConexionError, result.exceptionOrNull())
+        verify(exactly = 1) { superheroeRepositoryMockk.fetch() }
     }
 
     @Test
@@ -74,6 +77,7 @@ class FetchSuperHeroeUseCaseTest {
         // Then
         assertTrue(result.isFailure)
         assertEquals(ErrorApp.ServerErrorApp, result.exceptionOrNull())
+        verify(exactly = 1) { superheroeRepositoryMockk.fetch() }
     }
 
 }
