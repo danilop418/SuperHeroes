@@ -15,6 +15,7 @@ import edu.iesam.superheroes.features.domain.FetchSuperHeroeUseCase
 import edu.iesam.superheroes.features.domain.SuperHeroe
 
 class SuperHeroeActivity : AppCompatActivity() {
+    private lateinit var viewModel: SuperHeroesListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,17 +31,25 @@ class SuperHeroeActivity : AppCompatActivity() {
     }
 
     fun initSuperHeroes() {
-
         val api = SuperHeroesApiRemoteDataSource()
         val dataRepository = SuperHeroesDataRepository(api)
         val fetchSuperHeroeUseCase = FetchSuperHeroeUseCase(dataRepository)
-
         val superHeroesResult = fetchSuperHeroeUseCase.fetch()
+        viewModel = SuperHeroesListViewModel(fetchSuperHeroeUseCase)
 
         superHeroesResult.fold(
             { heroes -> onFetchSuccess(heroes) },
             { error -> onFetchFailure(error as ErrorApp) }
         )
+
+        viewModel.superheroes.observe(this) { heroes ->
+            onFetchSuccess(heroes)
+        }
+        viewModel.error.observe(this) { error ->
+            onFetchFailure(error)
+        }
+        viewModel.loadSuperheroes()
+
     }
 
     fun onFetchSuccess(heroes: List<SuperHeroe>) {
@@ -61,5 +70,4 @@ class SuperHeroeActivity : AppCompatActivity() {
     fun showServerError() {
         Log.d(TAG, "Error: The server is fall")
     }
-
 }
