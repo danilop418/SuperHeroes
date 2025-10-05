@@ -19,30 +19,35 @@ class SuperHeroesApiRemoteDataSource {
 
             else -> {
                 val heroes = listOf(
-                    SuperHeroe("1", "Solaris", "solaris", "https://example.com/images/solaris.jpg"),
+                    SuperHeroe(
+                        "1",
+                        "Spider-Man",
+                        "spiderman",
+                        "https://upload.wikimedia.org/wikipedia/en/0/0c/Spiderman50.jpg"
+                    ),
                     SuperHeroe(
                         "2",
-                        "Aquamancer",
-                        "aquamancer",
-                        "https://example.com/images/aquamancer.jpg"
+                        "Batman",
+                        "batman",
+                        "https://upload.wikimedia.org/wikipedia/en/1/17/Batman-BenAffleck.jpg"
                     ),
                     SuperHeroe(
                         "3",
-                        "Voltstrike",
-                        "voltstrike",
-                        "https://example.com/images/voltstrike.jpg"
+                        "Wonder Woman",
+                        "wonder_woman",
+                        "https://upload.wikimedia.org/wikipedia/en/e/ed/Wonder_Woman_%282017_film%29.jpg"
                     ),
                     SuperHeroe(
                         "4",
-                        "Shadowlynx",
-                        "shadowlynx",
-                        "https://example.com/images/shadowlynx.jpg"
+                        "Iron Man",
+                        "iron_man",
+                        "https://upload.wikimedia.org/wikipedia/en/0/00/Iron_Man_bleeding_edge.jpg"
                     ),
                     SuperHeroe(
                         "5",
-                        "Terranova",
-                        "terranova",
-                        "https://example.com/images/terranova.jpg"
+                        "Superman",
+                        "superman",
+                        "https://upload.wikimedia.org/wikipedia/en/3/35/Supermanflying.png"
                     )
                 )
                 Result.success(heroes)

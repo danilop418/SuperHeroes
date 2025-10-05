@@ -1,73 +1,72 @@
 package edu.iesam.superheroes.features.presentation
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.superheroes.R
 import edu.iesam.superheroes.features.data.remote.SuperHeroesApiRemoteDataSource
 import edu.iesam.superheroes.features.data.SuperHeroesDataRepository
-import edu.iesam.superheroes.features.domain.ErrorApp
 import edu.iesam.superheroes.features.domain.FetchSuperHeroeUseCase
 import edu.iesam.superheroes.features.domain.SuperHeroe
 
 class SuperHeroeActivity : AppCompatActivity() {
+
     private lateinit var viewModel: SuperHeroesListViewModel
+    private lateinit var adapter: SuperHeroesAdapter
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
-        initSuperHeroes()
+        setupViews()
+        setupViewModel()
+        observeUiState()
     }
 
-    fun initSuperHeroes() {
+    private fun setupViews() {
+        recyclerView = findViewById(R.id.recyclerViewSuperheroes)
+
+        adapter = SuperHeroesAdapter(emptyList()) { superhero ->
+            navigateToDetail(superhero)
+        }
+
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(this@SuperHeroeActivity)
+            adapter = this@SuperHeroeActivity.adapter
+        }
+    }
+
+    private fun setupViewModel() {
         val api = SuperHeroesApiRemoteDataSource()
-        val dataRepository = SuperHeroesDataRepository(api)
-        val fetchSuperHeroeUseCase = FetchSuperHeroeUseCase(dataRepository)
-        val superHeroesResult = fetchSuperHeroeUseCase.fetch()
-        viewModel = SuperHeroesListViewModel(fetchSuperHeroeUseCase)
-
-        superHeroesResult.fold(
-            { heroes -> onFetchSuccess(heroes) },
-            { error -> onFetchFailure(error as ErrorApp) }
-        )
-
-        viewModel.superheroes.observe(this) { heroes ->
-            onFetchSuccess(heroes)
-        }
-        viewModel.error.observe(this) { error ->
-            onFetchFailure(error)
-        }
-        viewModel.loadSuperheroes()
-
+        val repository = SuperHeroesDataRepository(api)
+        val useCase = FetchSuperHeroeUseCase(repository)
+        viewModel = SuperHeroesListViewModel(useCase)
     }
 
-    fun onFetchSuccess(heroes: List<SuperHeroe>) {
-        Log.d(TAG, "Loadding Superheroes : ${heroes.size}")
-    }
-
-    fun onFetchFailure(errorApp: ErrorApp) {
-        when (errorApp) {
-            is ErrorApp.InternetConexionError -> showInternetError()
-            is ErrorApp.ServerErrorApp -> showServerError()
+    private fun observeUiState() {
+        viewModel.uiState.observe(this) { state ->
+            when (state) {
+                is SuperHeroesUiState.Loading -> showLoading()
+                is SuperHeroesUiState.Success -> showSuccess(state.heroes)
+                is SuperHeroesUiState.Error -> showError(state.message)
+            }
         }
     }
 
-    fun showInternetError() {
-        Log.d(TAG, "Error: You don´t have internet")
+    private fun showLoading() {}
+
+    private fun showSuccess(heroes: List<SuperHeroe>) {
+        adapter.updateList(heroes)
     }
 
-    fun showServerError() {
-        Log.d(TAG, "Error: The server is fall")
+    private fun showError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun navigateToDetail(superhero: SuperHeroe) {
+        Toast.makeText(this, "Clicked: ${superhero.name}", Toast.LENGTH_SHORT).show()
     }
 }

@@ -7,19 +7,41 @@ import edu.iesam.superheroes.features.domain.ErrorApp
 import edu.iesam.superheroes.features.domain.FetchSuperHeroeUseCase
 import edu.iesam.superheroes.features.domain.SuperHeroe
 
-class SuperHeroesListViewModel(private val fetchSuperHeroeUseCase: FetchSuperHeroeUseCase) :
-    ViewModel() {
-    private val _superheroes = MutableLiveData<List<SuperHeroe>>()
-    val superheroes: LiveData<List<SuperHeroe>> = _superheroes
+class SuperHeroesListViewModel(
+    private val fetchSuperheroesUseCase: FetchSuperHeroeUseCase
+) : ViewModel() {
 
-    private val _error = MutableLiveData<ErrorApp>()
-    val error: LiveData<ErrorApp> = _error
+    private val _uiState = MutableLiveData<SuperHeroesUiState>(SuperHeroesUiState.Loading)
+    val uiState: LiveData<SuperHeroesUiState> = _uiState
+
+    init {
+        loadSuperheroes()
+    }
 
     fun loadSuperheroes() {
-        val result = fetchSuperHeroeUseCase.fetch()
+        _uiState.value = SuperHeroesUiState.Loading
+
+        val result = fetchSuperheroesUseCase.fetch()
+        handleResult(result)
+    }
+
+    private fun handleResult(result: Result<List<SuperHeroe>>) {
         result.fold(
-            { heroes -> _superheroes.value = heroes },
-            { error -> _error.value = error as ErrorApp }
+            onSuccess = { heroes ->
+                _uiState.value = SuperHeroesUiState.Success(heroes)
+            },
+            onFailure = { error ->
+                val message = when (error) {
+                    is ErrorApp.InternetConexionError -> "Sin conexión a internet"
+                    is ErrorApp.ServerErrorApp -> "Error del servidor"
+                    else -> "Error desconocido"
+                }
+                _uiState.value = SuperHeroesUiState.Error(message)
+            }
         )
+    }
+
+    fun retry() {
+        loadSuperheroes()
     }
 }
