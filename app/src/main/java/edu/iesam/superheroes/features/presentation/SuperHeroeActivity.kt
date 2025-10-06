@@ -1,6 +1,8 @@
 package edu.iesam.superheroes.features.presentation
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +22,7 @@ class SuperHeroeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Log.d(TAG, "onCreate: Activity iniciada")
 
         setupViews()
         setupViewModel()
@@ -27,9 +30,11 @@ class SuperHeroeActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
+        Log.d(TAG, "setupViews: Configurando vistas")
         recyclerView = findViewById(R.id.recyclerViewSuperheroes)
 
         adapter = SuperHeroesAdapter(emptyList()) { superhero ->
+            Log.d(TAG, "Click en superhéroe: ${superhero.name}")
             navigateToDetail(superhero)
         }
 
@@ -37,9 +42,11 @@ class SuperHeroeActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@SuperHeroeActivity)
             adapter = this@SuperHeroeActivity.adapter
         }
+        Log.d(TAG, "setupViews: RecyclerView configurado")
     }
 
     private fun setupViewModel() {
+        Log.d(TAG, "setupViewModel: Configurando ViewModel")
         val api = SuperHeroesApiRemoteDataSource()
         val repository = SuperHeroesDataRepository(api)
         val useCase = FetchSuperHeroeUseCase(repository)
@@ -47,7 +54,9 @@ class SuperHeroeActivity : AppCompatActivity() {
     }
 
     private fun observeUiState() {
+        Log.d(TAG, "observeUiState: Observando estados")
         viewModel.uiState.observe(this) { state ->
+            Log.d(TAG, "Estado recibido: ${state::class.simpleName}")
             when (state) {
                 is SuperHeroesUiState.Loading -> showLoading()
                 is SuperHeroesUiState.Success -> showSuccess(state.heroes)
@@ -56,17 +65,25 @@ class SuperHeroeActivity : AppCompatActivity() {
         }
     }
 
-    private fun showLoading() {}
+    private fun showLoading() {
+        Log.d(TAG, "showLoading: Mostrando loading")
+    }
 
     private fun showSuccess(heroes: List<SuperHeroe>) {
+        Log.d(TAG, "showSuccess: ${heroes.size} superhéroes recibidos")
+        heroes.forEachIndexed { index, hero ->
+            Log.d(TAG, "Héroe $index: ${hero.name}, URL: ${hero.urlImage}")
+        }
         adapter.updateList(heroes)
     }
 
     private fun showError(message: String) {
+        Log.e(TAG, "showError: $message")
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
     private fun navigateToDetail(superhero: SuperHeroe) {
+        Log.d(TAG, "navigateToDetail: ${superhero.name}")
         Toast.makeText(this, "Clicked: ${superhero.name}", Toast.LENGTH_SHORT).show()
     }
 }
