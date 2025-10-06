@@ -23,31 +23,31 @@ class SuperHeroesApiRemoteDataSource {
                         "1",
                         "Spider-Man",
                         "spiderman",
-                        "https://upload.wikimedia.org/wikipedia/en/0/0c/Spiderman50.jpg"
+                        "https://i.imgur.com/MV9Bzbt.jpg"
                     ),
                     SuperHeroe(
                         "2",
                         "Batman",
                         "batman",
-                        "https://upload.wikimedia.org/wikipedia/en/1/17/Batman-BenAffleck.jpg"
+                        "https://i.imgur.com/7Y7Y7Y7.jpg"
                     ),
                     SuperHeroe(
                         "3",
                         "Wonder Woman",
                         "wonder_woman",
-                        "https://upload.wikimedia.org/wikipedia/en/e/ed/Wonder_Woman_%282017_film%29.jpg"
+                        "https://i.imgur.com/3Qq7q3W.jpg"
                     ),
                     SuperHeroe(
                         "4",
                         "Iron Man",
                         "iron_man",
-                        "https://upload.wikimedia.org/wikipedia/en/0/00/Iron_Man_bleeding_edge.jpg"
+                        "https://i.imgur.com/4N4N4N4.jpg"
                     ),
                     SuperHeroe(
                         "5",
                         "Superman",
                         "superman",
-                        "https://upload.wikimedia.org/wikipedia/en/3/35/Supermanflying.png"
+                        "https://i.imgur.com/5V5V5V5.jpg"
                     )
                 )
                 Result.success(heroes)

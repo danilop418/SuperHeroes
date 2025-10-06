@@ -44,6 +44,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    kapt("com.github.bumptech.glide:compiler:4.16.0")
     testImplementation(libs.junit)
     testImplementation("io.mockk:mockk:1.14.5")
     androidTestImplementation(libs.androidx.junit)
