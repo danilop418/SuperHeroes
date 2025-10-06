@@ -3,9 +3,13 @@ package edu.iesam.superheroes.features.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import edu.iesam.superheroes.features.domain.ErrorApp
 import edu.iesam.superheroes.features.domain.FetchSuperHeroeUseCase
 import edu.iesam.superheroes.features.domain.SuperHeroe
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SuperHeroesListViewModel(
     private val fetchSuperheroesUseCase: FetchSuperHeroeUseCase
@@ -21,8 +25,12 @@ class SuperHeroesListViewModel(
     fun loadSuperheroes() {
         _uiState.value = SuperHeroesUiState.Loading
 
-        val result = fetchSuperheroesUseCase.fetch()
-        handleResult(result)
+        viewModelScope.launch {
+            val result = withContext(Dispatchers.IO) {
+                fetchSuperheroesUseCase.fetch()
+            }
+            handleResult(result)
+        }
     }
 
     private fun handleResult(result: Result<List<SuperHeroe>>) {
