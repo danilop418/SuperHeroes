@@ -3,7 +3,6 @@ package edu.iesam.superheroes.features.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import edu.iesam.superheroes.features.domain.ErrorApp
 import edu.iesam.superheroes.features.domain.FetchSuperHeroeUseCase
 import edu.iesam.superheroes.features.domain.SuperHeroe

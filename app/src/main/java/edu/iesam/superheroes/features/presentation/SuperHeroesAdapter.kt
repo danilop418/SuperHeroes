@@ -1,52 +1,42 @@
 package edu.iesam.superheroes.features.presentation
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.superheroes.R
-import edu.iesam.superheroes.features.domain.SuperHeroe
+import com.example.superherocards.databinding.ItemSuperheroBinding
+import com.squareup.picasso.Picasso
+import edu.iesam.superheroes.features.data.remote.Superhero
 
-class SuperHeroesAdapter(
-    private var superheroes: List<SuperHeroe>,
-    private val onItemClick: (SuperHeroe) -> Unit
-) : RecyclerView.Adapter<SuperHeroesAdapter.SuperHeroViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuperHeroViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_superhero, parent, false)
-        return SuperHeroViewHolder(view)
+class SuperHeroesAdapter(private var items: List<Superhero>, val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<ViewHolder>() {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val superhero = items[position]
+        holder.render(superhero)
+        holder.itemView.setOnClickListener {
+            onItemClick(position)
+        }
     }
 
-    override fun onBindViewHolder(holder: SuperHeroViewHolder, position: Int) {
-        holder.bind(superheroes[position])
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = ItemSuperheroBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = superheroes.size
+    override fun getItemCount(): Int {
+        return items.size
+    }
 
-    fun updateList(newList: List<SuperHeroe>) {
-        superheroes = newList
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateItems(items: List<Superhero>) {
+        this.items = items
         notifyDataSetChanged()
     }
+}
 
-    inner class SuperHeroViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val name: TextView = view.findViewById(R.id.superhero_name)
-        private val slug: TextView = view.findViewById(R.id.superhero_slug)
-        private val image: ImageView = view.findViewById(R.id.superhero_image)
+class ViewHolder(private val binding: ItemSuperheroBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(superhero: SuperHeroe) {
-            name.text = superhero.name
-            slug.text = superhero.slug ?: "Identidad desconocida"
-            Glide.with(itemView.context)
-                .load(superhero.urlImage)
-                .placeholder(R.drawable.ic_launcher_foreground)
-                .error(R.drawable.ic_launcher_foreground)
-                .centerCrop()
-                .into(image)
-            itemView.setOnClickListener { onItemClick(superhero) }
-        }
+    fun render(superhero: Superhero) {
+        binding.nameTextView.text = superhero.name
+        Picasso.get().load(superhero.image.url).into(binding.heroImageView)
     }
 }
