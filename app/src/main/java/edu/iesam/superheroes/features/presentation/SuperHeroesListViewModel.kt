@@ -24,32 +24,31 @@ class SuperHeroesListViewModel(
 
     fun loadSuperheroes() {
         _uiState.value = SuperHeroesUiState.Loading
-
         viewModelScope.launch {
             val result = withContext(Dispatchers.IO) {
                 fetchSuperheroesUseCase.fetch()
             }
-            handleResult(result)
-        }
-    }
-
-    private fun handleResult(result: Result<List<SuperHeroe>>) {
-        result.fold(
-            onSuccess = { heroes ->
-                _uiState.value = SuperHeroesUiState.Success(heroes)
-            },
-            onFailure = { error ->
-                val message = when (error) {
-                    is ErrorApp.InternetConexionError -> "Sin conexión a internet"
-                    is ErrorApp.ServerErrorApp -> "Error del servidor"
-                    else -> "Error desconocido"
+            result.fold(
+                onSuccess = { heroes -> _uiState.value = SuperHeroesUiState.Success(heroes) },
+                onFailure = { error ->
+                    val message = when (error) {
+                        is ErrorApp.InternetConexionError -> "Sin conexión a internet"
+                        is ErrorApp.ServerErrorApp -> "Error del servidor"
+                        else -> "Error desconocido"
+                    }
+                    _uiState.value = SuperHeroesUiState.Error(message)
                 }
-                _uiState.value = SuperHeroesUiState.Error(message)
-            }
-        )
+            )
+        }
     }
 
     fun retry() {
         loadSuperheroes()
     }
+}
+
+sealed class SuperHeroesUiState {
+    object Loading : SuperHeroesUiState()
+    data class Success(val superheroes: List<SuperHeroe>) : SuperHeroesUiState()
+    data class Error(val message: String) : SuperHeroesUiState()
 }

@@ -1,89 +1,42 @@
 package edu.iesam.superheroes.features.presentation
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.superheroes.R
-import edu.iesam.superheroes.features.data.remote.SuperHeroesApiRemoteDataSource
-import edu.iesam.superheroes.features.data.SuperHeroesDataRepository
 import edu.iesam.superheroes.features.domain.FetchSuperHeroeUseCase
-import edu.iesam.superheroes.features.domain.SuperHeroe
 
-class SuperHeroeActivity : AppCompatActivity() {
-
-    private lateinit var viewModel: SuperHeroesListViewModel
-    private lateinit var adapter: SuperHeroesAdapter
-    private lateinit var recyclerView: RecyclerView
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        Log.d(TAG, "onCreate: Activity iniciada")
 
-        setupViews()
-        setupViewModel()
-        observeUiState()
-    }
+        val adapter = SuperHeroesAdapter(emptyList())
 
-    private fun setupViews() {
-        Log.d(TAG, "setupViews: Configurando vistas")
-        recyclerView = findViewById(R.id.recyclerViewSuperheroes)
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerViewSuperheroes)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
 
-        adapter = SuperHeroesAdapter(emptyList()) { superhero ->
-            Log.d(TAG, "Click en superhéroe: ${superhero.name}")
-            navigateToDetail(superhero)
-        }
-
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(this@SuperHeroeActivity)
-            adapter = this@SuperHeroeActivity.adapter
-        }
-        Log.d(TAG, "setupViews: RecyclerView configurado")
-    }
-
-    private fun setupViewModel() {
-        Log.d(TAG, "setupViewModel: Configurando ViewModel")
-        val api = SuperHeroesApiRemoteDataSource()
-        val repository = SuperHeroesDataRepository(api)
-        val useCase = FetchSuperHeroeUseCase(repository)
-        viewModel = SuperHeroesListViewModel(useCase)
-    }
-
-    private fun observeUiState() {
-        Log.d(TAG, "observeUiState: Observando estados")
+        val viewModel = SuperHeroesListViewModel(FetchSuperHeroeUseCase())
         viewModel.uiState.observe(this) { state ->
-            Log.d(TAG, "Estado recibido: ${state::class.simpleName}")
             when (state) {
-                is SuperHeroesUiState.Loading -> showLoading()
-                is SuperHeroesUiState.Success -> showSuccess(state.heroes)
-                is SuperHeroesUiState.Error -> showError(state.message)
+                is SuperHeroesUiState.Success -> adapter.updateList(state.superheroes)
+                else -> {}
             }
         }
-    }
 
-    private fun showLoading() {
-        Log.d(TAG, "showLoading: Mostrando loading")
-    }
-
-    private fun showSuccess(heroes: List<SuperHeroe>) {
-        Log.d(TAG, "showSuccess: ${heroes.size} superhéroes recibidos")
-        heroes.forEachIndexed { index, hero ->
-            Log.d(TAG, "Héroe $index: ${hero.name}, URL: ${hero.urlImage}")
+        ViewCompat.setOnApplyWindowInsetsListener(recyclerView) { view, insets ->
+            val systemBars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+            )
+            view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
         }
-        adapter.updateList(heroes)
-    }
-
-    private fun showError(message: String) {
-        Log.e(TAG, "showError: $message")
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-    }
-
-    private fun navigateToDetail(superhero: SuperHeroe) {
-        Log.d(TAG, "navigateToDetail: ${superhero.name}")
-        Toast.makeText(this, "Clicked: ${superhero.name}", Toast.LENGTH_SHORT).show()
     }
 }

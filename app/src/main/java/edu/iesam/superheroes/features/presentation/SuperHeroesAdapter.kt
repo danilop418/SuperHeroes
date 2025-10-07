@@ -16,14 +16,13 @@ class SuperHeroesAdapter(
 ) : RecyclerView.Adapter<SuperHeroesAdapter.SuperHeroViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuperHeroViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_superhero, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_superhero, parent, false)
         return SuperHeroViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: SuperHeroViewHolder, position: Int) {
-        val superhero = superheroes[position]
-        holder.bind(superhero)
+        holder.bind(superheroes[position])
     }
 
     override fun getItemCount(): Int = superheroes.size
@@ -34,26 +33,20 @@ class SuperHeroesAdapter(
     }
 
     inner class SuperHeroViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val tvName: TextView = view.findViewById(R.id.tvName)
-        private val tvRealName: TextView = view.findViewById(R.id.tvRealName)
-        private val ivSuperhero: ImageView = view.findViewById(R.id.ivSuperhero)
+        private val name: TextView = view.findViewById(R.id.superhero_name)
+        private val slug: TextView = view.findViewById(R.id.superhero_slug)
+        private val image: ImageView = view.findViewById(R.id.superhero_image)
 
         fun bind(superhero: SuperHeroe) {
-            tvName.text = superhero.name
-            tvRealName.text = superhero.slug ?: "Identidad desconocida"
-            itemView.setOnClickListener {
-                onItemClick(superhero)
-            }
+            name.text = superhero.name
+            slug.text = superhero.slug ?: "Identidad desconocida"
             Glide.with(itemView.context)
                 .load(superhero.urlImage)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_foreground)
                 .centerCrop()
-                .into(ivSuperhero)
-
-            itemView.setOnClickListener {
-                onItemClick(superhero)
-            }
+                .into(image)
+            itemView.setOnClickListener { onItemClick(superhero) }
         }
     }
 }
