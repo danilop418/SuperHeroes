@@ -11,7 +11,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.superherocards.R
 import com.example.superherocards.databinding.ActivityDetailBinding
 import com.squareup.picasso.Picasso
-import edu.iesam.superheroes.features.data.remote.SuperHeroeProvider
 import edu.iesam.superheroes.features.data.remote.Superhero
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

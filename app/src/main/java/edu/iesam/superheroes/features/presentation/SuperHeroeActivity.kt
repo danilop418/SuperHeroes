@@ -13,7 +13,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.superherocards.R
 import com.example.superherocards.databinding.ActivityMainBinding
-import edu.iesam.superheroes.features.data.remote.SuperHeroeProvider
 import edu.iesam.superheroes.features.data.remote.Superhero
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
