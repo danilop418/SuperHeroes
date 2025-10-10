@@ -4,20 +4,18 @@ plugins {
 }
 
 android {
-    namespace = "com.example.superherocards"
-    compileSdk = 34
+    namespace = "com.example.superheroes"
+    compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.superherocards"
+        applicationId = "com.example.superheroapi"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
-    buildFeatures {viewBinding = true}
 
     buildTypes {
         release {
@@ -39,18 +37,20 @@ android {
 
 dependencies {
 
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.firebase.database.ktx)
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("io.coil-kt:coil:2.7.0")
     testImplementation(libs.junit)
+    testImplementation("io.mockk:mockk:1.13.7")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(kotlin("test"))
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 }

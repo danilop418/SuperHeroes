@@ -1,7 +1,7 @@
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.superheroes.features.domain.SuperHeroe
+import edu.iesam.superheroes.features.domain.SuperHeroe
 
 class SuperHeroDetailViewModel : ViewModel() {
 

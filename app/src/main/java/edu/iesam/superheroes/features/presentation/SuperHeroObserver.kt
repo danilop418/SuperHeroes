@@ -2,7 +2,7 @@ package edu.iesam.superheroes.features.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.superheroes.features.domain.SuperHeroe
+import edu.iesam.superheroes.features.domain.SuperHeroe
 
 
 object SuperHeroObserver {

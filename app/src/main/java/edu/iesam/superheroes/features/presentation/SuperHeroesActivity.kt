@@ -12,9 +12,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.superheroes.R
-import com.example.superheroes.core.api.ApiClient
-import com.example.superheroes.features.data.remote.api.SuperHeroesApiRemoteDataSource
-import com.example.superheroes.features.domain.GetAllSuperHeroesUseCase
+import edu.iesam.superheroes.features.data.core.api.ApiClient
+import edu.iesam.superheroes.features.data.remote.api.SuperHeroesApiRemoteDataSource
+import edu.iesam.superheroes.features.domain.FetchSuperHeroeUseCase
 
 class SuperHeroesActivity : AppCompatActivity() {
 
@@ -52,7 +52,7 @@ class SuperHeroesActivity : AppCompatActivity() {
         val apiClient = ApiClient()
         val remoteDataSource = SuperHeroesApiRemoteDataSource(apiClient)
         val repository = SuperHeroesDataRepository(remoteDataSource)
-        val getAllSuperHeroesUseCase = GetAllSuperHeroesUseCase(repository)
+        val getAllSuperHeroesUseCase = FetchSuperHeroeUseCase(repository)
 
         viewModel = SuperHeroesListViewModel(getAllSuperHeroesUseCase)
     }
@@ -65,9 +65,9 @@ class SuperHeroesActivity : AppCompatActivity() {
         viewModel.error.observe(this) { error ->
             error?.let {
                 val message = when (it) {
-                    is com.example.superheroes.features.domain.ErrorApp.InternetConexionError ->
+                    is edu.iesam.superheroes.features.domain.ErrorApp.InternetConexionError ->
                         "Sin conexión a Internet"
-                    is com.example.superheroes.features.domain.ErrorApp.ServerErrorApp ->
+                    is edu.iesam.superheroes.features.domain.ErrorApp.ServerErrorApp ->
                         "Error del servidor"
                     else -> "Error desconocido"
                 }

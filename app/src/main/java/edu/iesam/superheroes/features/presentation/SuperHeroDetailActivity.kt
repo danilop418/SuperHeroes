@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import coil.load
 import com.example.superheroes.R
-import com.example.superheroes.features.domain.SuperHeroe
+import edu.iesam.superheroes.features.domain.SuperHeroe
 
 class SuperHeroDetailActivity : AppCompatActivity() {
 

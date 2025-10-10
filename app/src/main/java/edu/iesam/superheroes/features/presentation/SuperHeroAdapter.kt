@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.superheroes.R
-import com.example.superheroes.features.domain.SuperHeroe
+import edu.iesam.superheroes.features.domain.SuperHeroe
 import edu.iesam.superheroes.features.presentation.SuperHeroDetailActivity
 import edu.iesam.superheroes.features.presentation.SuperHeroObserver
 import edu.iesam.superheroes.features.presentation.SuperHeroeUiModel

@@ -2,14 +2,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.superheroes.features.domain.ErrorApp
-import com.example.superheroes.features.domain.GetAllSuperHeroesUseCase
-import com.example.superheroes.features.domain.SuperHeroe
+import edu.iesam.superheroes.features.domain.ErrorApp
+import edu.iesam.superheroes.features.domain.FetchSuperHeroeUseCase
+import edu.iesam.superheroes.features.domain.SuperHeroe
 import edu.iesam.superheroes.features.presentation.SuperHeroeUiModel
 import kotlinx.coroutines.launch
 
 class SuperHeroesListViewModel(
-    private val getAllSuperHeroesUseCase: GetAllSuperHeroesUseCase
+    private val getAllSuperHeroesUseCase: FetchSuperHeroeUseCase
 ) : ViewModel() {
 
     private val _superHeroes = MutableLiveData<List<SuperHeroeUiModel>>()
