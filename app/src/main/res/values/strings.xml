@@ -1,3 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SuperHeroes</string>
+    <!-- App -->
+    <string name="app_name">SuperHero Showcase</string>
+
+    <!-- Header -->
+    <string name="header_title">SuperHero Showcase</string>
+    <string name="header_logo_desc">SuperHero Showcase Logo</string>
+
+    <!-- Banner -->
+    <string name="banner_image_desc">Superhero Team</string>
+    <string name="banner_title">Discover Your Heroes</string>
+    <string name="banner_subtitle">Explore the greatest superheroes of all time</string>
+
+    <!-- Search -->
+    <string name="search_hint">Search heroes...</string>
+
+    <!-- Filters -->
+    <string name="filter_all">All Heroes</string>
+    <string name="filter_marvel">Marvel</string>
+    <string name="filter_dc">DC</string>
+    <string name="filter_independent">Independent</string>
+
+    <!-- Results -->
+    <string name="results_count">Showing %d heroes</string>
+
+    <!-- No results -->
+    <string name="no_results_emoji">🦸‍♂️</string>
+    <string name="no_results_title">No heroes found</string>
+    <string name="no_results_message">Try adjusting your search or filter criteria</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_details">Details</string>
+
+    <!-- Content descriptions -->
+    <string name="favorite_button_desc">Add to favorites</string>
+    <string name="hero_image_desc">Hero image</string>
 </resources>

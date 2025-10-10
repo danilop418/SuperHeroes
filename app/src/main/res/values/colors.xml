@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Paleta principal -->
+    <color name="midnight_blue">#1a1a2e</color>
+    <color name="midnight_blue_variant">#16213e</color>
+    <color name="crimson">#e74c3c</color>
+    <color name="electric_gold">#f39c12</color>
+    <color name="steel_gray">#34495e</color>
+    <color name="pure_white">#ffffff</color>
+    <color name="subtle_silver">#bdc3c7</color>
+
+    <!-- Colores con transparencia -->
+    <color name="white_10">#1AFFFFFF</color>
+    <color name="white_20">#33FFFFFF</color>
+    <color name="black_50">#80000000</color>
+    <color name="steel_gray_80">#CC34495e</color>
+    <color name="electric_gold_30">#4Df39c12</color>
+    <color name="midnight_blue_95">#F21a1a2e</color>
 </resources>
