@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_superhero">
+
+    <ScrollView
+        android:id="@+id/detailContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/superHeroImage"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/avatars"/>
+
+            <!-- Biography -->
+            <TextView android:id="@+id/fullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView android:id="@+id/slug"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"/>
+
+            <TextView android:id="@+id/biography_section" android:text="Biography" style="@style/Widget.AppCompat.TextView.SpinnerItem" android:layout_marginTop="10dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/alterEgos" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/aliases" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/placeOfBirth" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/firstAppearance" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/publisher" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/alignment" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+            <!-- PowerStats -->
+            <TextView android:id="@+id/powerstats_section" android:text="Power Stats" style="@style/Widget.AppCompat.TextView.SpinnerItem" android:layout_marginTop="10dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/intelligence" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/strength" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/speed" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/durability" android_layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/power" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/combat" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+            <!-- Appearance -->
+            <TextView android:id="@+id/appearance_section" android:text="Appearance" style="@style/Widget.AppCompat.TextView.SpinnerItem" android:layout_marginTop="10dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/gender" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/race" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/height" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/weight" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/eyeColor" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/hairColor" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+            <!-- Work -->
+            <TextView android:id="@+id/work_section" android:text="Work" style="@style/Widget.AppCompat.TextView.SpinnerItem" android:layout_marginTop="10dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/occupation" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/base" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+            <!-- Connections -->
+            <TextView android:id="@+id/connections_section" android:text="Connections" style="@style/Widget.AppCompat.TextView.SpinnerItem" android:layout_marginTop="10dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/groupAffiliation" android:layout_width="wrap_content" android_layout_height="wrap_content"/>
+            <TextView android:id="@+id/relatives" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/errorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/ic_error" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An error occurred" />
+
+        <Button
+            android:id="@+id/retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Retry"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

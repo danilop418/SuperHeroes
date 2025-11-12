@@ -1,18 +1,18 @@
-package edu.iesam.superheroes.features.data.remote.api
+package edu.iesam.superheroes.features.domain
 
-data class SuperHeroModel(
+data class SuperHero(
     val id: Int,
     val name: String,
     val slug: String,
-    val powerStats: PowerStatsModel,
-    val appearence: AppearanceModel,
-    val biography: BiographyModel,
-    val work: WorkModel,
-    val connections: ConnectionsModel,
-    val images: ImagesModel
+    val powerStats: PowerStats,
+    val appearence: Appearance,
+    val biography: Biography,
+    val work: Work,
+    val connections: Connections,
+    val images: Images
 )
 
-data class PowerStatsModel(
+data class PowerStats(
     val intelligence: Int,
     val strength: Int,
     val speed: Int,
@@ -21,7 +21,7 @@ data class PowerStatsModel(
     val combat: Int
 )
 
-data class AppearanceModel(
+data class Appearance(
     val gender: String,
     val race: String,
     val height: List<String>,
@@ -30,7 +30,7 @@ data class AppearanceModel(
     val hairColor: String
 )
 
-data class BiographyModel(
+data class Biography(
     val fullName: String,
     val alterEgos: String,
     val aliases: List<String>,
@@ -40,16 +40,16 @@ data class BiographyModel(
     val alignment: String
 )
 
-data class WorkModel(
+data class Work(
     val occupation: String,
     val base: String
 )
 
-data class ConnectionsModel(
+data class Connections(
     val groupAffiliation: String,
     val relatives: String
 )
 
-data class ImagesModel(
+data class Images(
     val md: String
 )

@@ -1,39 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- App -->
-    <string name="app_name">SuperHero Showcase</string>
-
-    <!-- Header -->
-    <string name="header_title">SuperHero Showcase</string>
-    <string name="header_logo_desc">SuperHero Showcase Logo</string>
-
-    <!-- Banner -->
-    <string name="banner_image_desc">Superhero Team</string>
-    <string name="banner_title">Discover Your Heroes</string>
-    <string name="banner_subtitle">Explore the greatest superheroes of all time</string>
-
-    <!-- Search -->
-    <string name="search_hint">Search heroes...</string>
-
-    <!-- Filters -->
-    <string name="filter_all">All Heroes</string>
-    <string name="filter_marvel">Marvel</string>
-    <string name="filter_dc">DC</string>
-    <string name="filter_independent">Independent</string>
-
-    <!-- Results -->
-    <string name="results_count">Showing %d heroes</string>
-
-    <!-- No results -->
-    <string name="no_results_emoji">🦸‍♂️</string>
-    <string name="no_results_title">No heroes found</string>
-    <string name="no_results_message">Try adjusting your search or filter criteria</string>
-
-    <!-- Bottom Navigation -->
-    <string name="nav_home">Home</string>
-    <string name="nav_details">Details</string>
-
-    <!-- Content descriptions -->
-    <string name="favorite_button_desc">Add to favorites</string>
-    <string name="hero_image_desc">Hero image</string>
+    <string name="app_name">Simpsons</string>
+    <string name="retry">Reintentar</string>
+    <string name="simpson_detail_phrase_title">Frase característica</string>
+    <string name="simpson_detail_details_title">Detalles</string>
+    <string name="simpson_detail_image">Imagen del personaje</string>
+    <string name="error_icon">Icono de error</string>
+    <string name="error_server">Error del servidor\nIntentelo más tarde</string>
+    <string name="error_network">Error de red\nRevise su conexión a internet</string>
+    <string name="retry_button">Reintentar</string>
+    <string name="pincha_el_rosco">Pincha el rosco</string>
+    <string name="detail_name_label">Name:</string>
+    <string name="detail_phrase_label">Phrase:</string>
+    <string name="the_simpsons_app">The Simpsons App</string>
 </resources>

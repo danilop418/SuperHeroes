@@ -1,35 +1,45 @@
 package edu.iesam.superheroes.features.data.remote.api
 
-
-import edu.iesam.superheroes.features.data.core.api.ApiClient
+import edu.iesam.superheroes.features.core.api.ApiClient
 import edu.iesam.superheroes.features.domain.ErrorApp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.IOException
 
-class SuperHeroesApiRemoteDataSource(private val apiClient: ApiClient) {
-    suspend fun getSuperHeroes(): Result<List<SuperHeroApiModel>> {
+
+class SuperHeroesApiRemoteDataSource(private val api: ApiClient) {
+
+    suspend fun getAll(): Result<List<SuperHeroModel>> {
         return withContext(Dispatchers.IO) {
-            val apiService = apiClient.createService(SuperHeroApiService::class.java)
-            val resultSuperHero = apiService.findAll()
-
-            if (resultSuperHero.isSuccessful && resultSuperHero.body() != null) {
-                Result.success(resultSuperHero.body()!!)
-            } else {
-                Result.failure(ErrorApp.ServerErrorApp)
+            try {
+                val apiService = api.createService(SuperHeroesApiService::class.java)
+                val response = apiService.getAll()
+                if (response.isSuccessful && response.body() != null) {
+                    val superHeroes = response.body()!!.superHeroes
+                    Result.success(superHeroes)
+                } else {
+                    Result.failure(ErrorApp.ServerErrorApp)
+                }
+            } catch (e: IOException) {
+                Result.failure(ErrorApp.InternetConexionError)
             }
         }
     }
 
-    suspend fun getSuperHeroById(id: String): Result<SuperHeroApiModel> {
-        return withContext(Dispatchers.IO) {
-            val apiService = apiClient.createService(SuperHeroApiService::class.java)
-            val response = apiService.findById(id)
-
-            if (response.isSuccessful && response.body() != null) {
-                Result.success(response.body()!!)
-            } else {
-                Result.failure(ErrorApp.ServerErrorApp)
+        suspend fun getById(id: Int): Result<SuperHeroModel> {
+            return withContext(Dispatchers.IO) {
+                try {
+                    val apiService = api.createService(SuperHeroesApiService::class.java)
+                    val response = apiService.getById(id)
+                    if (response.isSuccessful && response.body() != null) {
+                        val superHeroes = response.body()!!
+                        Result.success(superHeroes)
+                    } else {
+                        Result.failure(ErrorApp.ServerErrorApp)
+                    }
+                } catch (e: IOException) {
+                    Result.failure(ErrorApp.InternetConexionError)
+                }
             }
         }
     }
-}

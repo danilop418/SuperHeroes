@@ -1,6 +1,7 @@
 package edu.iesam.superheroes.features.domain
 
 interface SuperHeroeRepository {
-    suspend fun fetch(): Result<List<SuperHeroe>>
-    suspend fun getSuperHeroById(id: String): Result<SuperHeroe>
+    suspend fun findAll(): Result<List<SuperHero>>
+    suspend fun findById(id: Int): Result<SuperHero>
+
 }

@@ -4,11 +4,12 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface SuperHeroApiService {
-    @GET("all.json")
-    suspend fun findAll(): Response<List<SuperHeroApiModel>>
+interface SuperHeroesApiService {
 
-    @GET("id/{id}.json")
-    suspend fun findById(@Path("id") id: String): Response<SuperHeroApiModel>
+    @GET("/all.json")
+    suspend fun getAll(): Response<SuperHeroesApiResponse>
+
+    @GET("/id/1.json")
+    suspend fun getById(@Path("id") id: Int): Response<SuperHeroModel>
 
 }
