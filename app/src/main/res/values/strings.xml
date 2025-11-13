@@ -12,4 +12,6 @@
     <string name="detail_name_label">Name:</string>
     <string name="detail_phrase_label">Phrase:</string>
     <string name="the_simpsons_app">The Simpsons App</string>
+    <string name="super_hero_app">Super Hero App</string>
+    <string name="pincha_en_el_icono_para_comenzar_la_aventura">Pincha en el icono para comenzar la aventura</string>
 </resources>

@@ -4,21 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/super_hero_background"
-    tools:context=".features.presentation.initialization.InitializationFragment">
+    android:background="@drawable/superhero_background"
+    tools:context="edu.iesam.superheroes.features.presentation.initialization.InitializationFragment">
 
     <TextView
         android:id="@+id/app_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="156dp"
         android:fontFamily="@font/SuperBrigade3D-pg3Pa"
-        android:text="Super Hero App"
+        android:text="@string/super_hero_app"
         android:textAlignment="center"
         android:textColor="@color/superhero_red"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,14 +28,14 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/enter_app_button_description"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_superhero_logo"
+        android:src="@drawable/button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_title"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.575" />
 
     <TextView
         android:id="@+id/curious_phrase"
@@ -42,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/SuperBrigade3D-pg3Pa"
-        android:text="Pincha en el icono para comenzar la aventura"
+        android:text="@string/pincha_en_el_icono_para_comenzar_la_aventura"
         android:textAlignment="center"
         android:textColor="@color/pure_white"
         android:textSize="20sp"
